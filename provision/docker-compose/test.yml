@@ -1,0 +1,17 @@
+# Docker Compose
+# https://docs.docker.com/compose/
+#
+# Usage: test up
+
+version: "3.6"
+services:
+
+  app:
+    image: air_pollution-app-test
+    environment: &environment
+      - STAGE=test
+    build:
+      args:
+        stage: test
+    volumes:
+      - .:/usr/src

@@ -1,0 +1,30 @@
+# Docker Compose
+# https://docs.docker.com/compose/
+
+version: "3.6"
+services:
+
+  # Python
+  app:
+    image: air_pollution-app-dev
+    environment: &environment
+      - STAGE=local
+    build:
+      args:
+        stage: dev
+    volumes:
+      - .:/usr/src
+    env_file:
+      - .env
+
+  check:
+    environment: *environment
+    build:
+      context: .
+      dockerfile: provision/docker/check/Dockerfile
+      args:
+        stage: dev
+    volumes:
+      - .:/usr/src
+    env_file:
+      - .env
