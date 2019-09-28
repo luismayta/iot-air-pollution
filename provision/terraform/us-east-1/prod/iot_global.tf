@@ -65,7 +65,7 @@ resource "aws_iot_topic_rule" "air_pollution_sensor_rule" {
   sql_version = "2016-03-23"
 
   sqs {
-    queue_url  = "https://sqs.us-east-1.amazonaws.com/756579151825/air-pollution_queue"
+    queue_url  = aws_sqs_queue.air-pollution_queue.id
     role_arn   = aws_iam_role.air-pollution_iot_iam_role.arn
     use_base64 = false
   }
