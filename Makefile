@@ -53,6 +53,7 @@ help:
 	@echo '    setup                     install requirements'
 	@echo ''
 	@make alias.help
+	@make docker.help
 	@make test.help
 	@make keybase.help
 	@make terragrunt.help
@@ -73,7 +74,7 @@ endif
 
 setup: clean
 	@echo "=====> install packages..."
-	$(PIPENV_INSTALL) --dev --skip-lock
+	$(PIPENV_INSTALL) --dev
 	$(PIPENV_RUN) pre-commit install
 	@cp -rf provision/git/hooks/prepare-commit-msg .git/hooks/
 	@[[ ! -e ".env" ]] && [[ -e ".env-sample" ]] || cp -rf .env-sample .env
@@ -81,4 +82,4 @@ setup: clean
 
 environment: clean
 	@echo "=====> loading virtualenv ${PYENV_NAME}..."
-	@pipenv --venv || $(PIPENV_INSTALL) --skip-lock --python ${PYTHON_VERSION}
+	@pipenv --venv || $(PIPENV_INSTALL) --python ${PYTHON_VERSION}
