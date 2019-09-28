@@ -1,7 +1,7 @@
 {
   "_meta": {
     "hash": {
-      "sha256": "f696013be9452b8661a375fcaa64e709d9d736ed30c377d512350314f9782d70"
+      "sha256": "d212010ace4f92463a1ca6badd8d4b06ccbc4891e7fe652c05521ab9f4767dc3"
     },
     "pipfile-spec": 6,
     "requires": {
@@ -35,6 +35,13 @@
         "sha256:9d5c20441baf0cb60a4ac34cc447c6c189024b6b4c6cd7877034f4965c464e49"
       ],
       "version": "==0.24.0"
+    },
+    "awsiotpythonsdk": {
+      "hashes": [
+        "sha256:7e67c8cfeee8a1c8fd251bcc418de9d4dca697753565c9a9e614525179d9555d"
+      ],
+      "index": "pypi",
+      "version": "==1.4.7"
     },
     "cffi": {
       "hashes": [
