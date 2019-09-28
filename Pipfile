@@ -1,0 +1,49 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+docker-compose = "*"
+caniusepython3 = "*"
+isort = "*"
+mypy = "*"
+pycodestyle = "*"
+pydocstyle = "*"
+pylint = "*"
+mock = "*"
+pytest-cov = "*"
+pytest = "*"
+tox = "*"
+ipython = "*"
+parso = "*"
+PyYAML = "*"
+PyHamcrest = "*"
+bumplus = "==0.0.8"
+bumpversion = "==0.5.3"
+restview = "==2.8.1"
+rst = "==0.1"
+pre-commit = "*"
+pygments = "*"
+sphinx = "*"
+sphinx-rtd-theme = "*"
+sphinxcontrib-plantuml = "*"
+sphinx-intl = "*"
+django-extensions = "*"
+pytest-deadfixtures = ">=2.1.0"
+pytest-picked = ">=0.4.1"
+pytest-pythonpath = "*"
+pytest-sugar = ">=0.9.2"
+pytest-runner = "*"
+pyhamcrest = "*"
+factory-boy = ">=2.10.0"
+flake8 = "*"
+
+[packages]
+ansible-vault = "*"
+
+[scripts]
+test = "pytest"
+
+[requires]
+python_version = "3.7.3"
