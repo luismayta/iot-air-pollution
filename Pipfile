@@ -41,6 +41,7 @@ flake8 = "*"
 
 [packages]
 ansible-vault = "*"
+paho-mqtt = "*"
 
 [scripts]
 test = "pytest"
