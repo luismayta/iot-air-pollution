@@ -1,0 +1,21 @@
+# Docker Compose
+# https://docs.docker.com/compose/
+# Usage: docker-compose up
+---
+version: "3.6"
+
+services:
+
+  app:
+    ports:
+      - "8000:8000"
+    build:
+      context: .
+      dockerfile: provision/docker/app/Dockerfile
+    environment: &environment
+      - AWS_REGION=us-east-1
+      - AWS_DEFAULT_REGION=us-east-1
+    volumes:
+      - .:/usr/src
+    env_file:
+      - .env
