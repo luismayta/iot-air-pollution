@@ -12,7 +12,8 @@ resource "aws_iot_policy" "air-pollution_pubsub" {
   policy = <<EOF
 {
         "Version": "2012-10-17",
-        "Statement": [ {
+        "Statement": [
+        {
             "Action": ["iot:*"],
             "Effect": "Allow",
             "Resource": "*"
