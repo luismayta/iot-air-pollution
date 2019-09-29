@@ -25,3 +25,7 @@ provider "null" {
 provider "tls" {
   version = ">=2.1.1"
 }
+
+provider "local" {
+  version = ">=1.3.0"
+}
