@@ -3,7 +3,7 @@
  */
 
 resource "aws_iot_thing_type" "air-pollution" {
-  name = "air-pollution"
+  name = "pollution"
 }
 
 resource "aws_iot_policy" "air-pollution_pubsub" {
