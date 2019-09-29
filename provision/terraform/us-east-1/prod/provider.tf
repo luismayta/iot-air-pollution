@@ -21,3 +21,7 @@ provider "template" {
 provider "null" {
   version = ">=0.1.0"
 }
+
+provider "tls" {
+  version = ">=2.1.1"
+}
