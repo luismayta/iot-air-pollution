@@ -1,10 +1,25 @@
 resource "aws_iot_thing" "air-pollution" {
   name            = "air-pollution"
   thing_type_name = "air-pollution"
-  # MQ2 (Humo), MQ5 (GLP), MQ7 (CO), MQ135 (CO2) y DHT22
+}
+
+resource "tls_cert_request" "air-pollution" {
+  key_algorithm   = "RSA"
+  private_key_pem = file(var.private_key)
+
+  subject {
+    common_name    = "Air Pollution"
+    organization   = "Air Pollution, Inc"
+    street_address = ["Kettwiger Str. 20"]
+    locality       = "Lima"
+    postal_code    = "380000"
+    province       = "Lima"
+    country        = "Peru"
+  }
 }
 
 resource "aws_iot_certificate" "cert_air-pollution" {
+  csr    = tls_cert_request.air-pollution.cert_request_pem
   active = true
 }
 
