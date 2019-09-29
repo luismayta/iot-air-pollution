@@ -20,6 +20,7 @@ endif
 TEAM:=luismayta
 PROJECT := terraform-iot-air-pollution
 PROJECT_PORT := 8000
+KEYNAME:=air-pollution
 
 PYTHON_VERSION=3.7.3
 PYENV_NAME="${PROJECT}"
@@ -34,6 +35,8 @@ PROVISION_DIR:=$(ROOT_DIR)/provision
 FILE_README:=$(ROOT_DIR)/README.rst
 KEYBASE_PATH ?= /keybase/private/${TEAM}
 KEYS_PEM_DIR:=${KEYBASE_PATH}/pem
+KEYS_KEY_DIR:=${KEYBASE_PATH}/key
+KEYS_CSR_DIR:=${KEYBASE_PATH}/csr
 KEYS_PUB_DIR:=${KEYBASE_PATH}/pub
 KEYS_PRIVATE_DIR:=${KEYBASE_PATH}/private/key_file/${PROJECT}
 PASSWORD_DIR:=${KEYBASE_PATH}/password
@@ -52,6 +55,7 @@ help:
 	@echo '    clean                     remove files of build'
 	@echo '    setup                     install requirements'
 	@echo ''
+	@make aws.help
 	@make alias.help
 	@make docker.help
 	@make test.help
