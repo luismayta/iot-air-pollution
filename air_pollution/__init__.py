@@ -1,10 +1,23 @@
 # -*- coding: utf-8 -*-
+import os
 from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 import json
 import time
+from config import configs
+
+stage = configs[os.environ.get("STAGE")]
+
+# Parameters
+host = stage.HOST
+root_ca_path = stage.ROOT_CA_PATH
+certificate_path = stage.CERTIFICATE_PATH
+private_key_path = stage.PRIVATE_KEY_PATH
+client_id = "air-pollution"
+topic = "thing"
+location = "home"
 
 # Custom MQTT message callback
-def on_message(client, data, message):
+def on_message(client: AWSIoTMQTTClient, data: dict, message) -> None:
     print("Received a new message: ")
     print(message.payload)
     print("from topic: ")
@@ -12,48 +25,40 @@ def on_message(client, data, message):
     print("--------------\n\n")
 
 
-# Parameters
-host = "amzoprft33wg6-ats.iot.us-east-1.amazonaws.com"
-root_ca_path = "/keybase/private/luismayta/csr/terraform-iot-air-pollution-prod-root-certificate.pem.crt"
-certificate_path = (
-    "/keybase/private/luismayta/csr/terraform-iot-air-pollution-prod.pem.crt"
-)
-private_key_path = (
-    "/keybase/private/luismayta/csr/terraform-iot-air-pollution-prod.private.key"
-)
+def get_mqtt_client() -> AWSIoTMQTTClient:
+    """Connect to Mqtt"""
+    mqtt_client = None
+    mqtt_client = AWSIoTMQTTClient(client_id)
+    mqtt_client.configureEndpoint(host, 8883)
+    mqtt_client.configureCredentials(root_ca_path, private_key_path, certificate_path)
+    mqtt_client.configureAutoReconnectBackoffTime(1, 32, 20)
+    mqtt_client.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
+    mqtt_client.configureDrainingFrequency(2)  # Draining: 2 Hz
+    mqtt_client.configureConnectDisconnectTimeout(10)  # 10 sec
+    mqtt_client.configureMQTTOperationTimeout(5)  # 5 sec
+    mqtt_client.connect()
+    return mqtt_client
 
-client_id = "air-pollution"
-topic = "thing"
-location = "home"
 
-# Init AWSIoTMQTTClient
-mqttclient = None
-mqttclient = AWSIoTMQTTClient(client_id)
-mqttclient.configureEndpoint(host, 8883)
-mqttclient.configureCredentials(root_ca_path, private_key_path, certificate_path)
+def send_message(client: AWSIoTMQTTClient, data: dict) -> None:
+    message_json = json.dumps(data)
+    client.publish(topic, message_json, 1)
 
-mqttclient.configureAutoReconnectBackoffTime(1, 32, 20)
-mqttclient.configureOfflinePublishQueueing(-1)  # Infinite offline Publish queueing
-mqttclient.configureDrainingFrequency(2)  # Draining: 2 Hz
-mqttclient.configureConnectDisconnectTimeout(10)  # 10 sec
-mqttclient.configureMQTTOperationTimeout(5)  # 5 sec
 
-# Built message
-message_template = {
-    "device": client_id,
-    "location": location,
-    "mq2": 30,
-    "mq5": 30,
-    "mq7": 30,
-    "mq135": 30,
-    "dht22": 30,
-}
-
-message_json = json.dumps(message_template)
-
-mqttclient.connect()
-
-while True:
-    mqttclient.publish(topic, message_json, 1)
-    print("Published topic %s: %s\n" % (topic, message_json))
-    time.sleep(1)
+if __name__ == "__main__":
+    """Execute send payload."""
+    client = get_mqtt_client()
+    while True:
+        # Built message
+        message = {
+            "device": client_id,
+            "location": location,
+            "mq2": 30,
+            "mq5": 30,
+            "mq7": 30,
+            "mq135": 30,
+            "dht22": 30,
+        }
+        send_message(client=client, data=message)
+        print("Published topic %s: %s\n" % (topic, message))
+        time.sleep(1)
