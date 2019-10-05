@@ -45,6 +45,7 @@ paho-mqtt = "*"
 awsiotpythonsdk = "*"
 aws = "*"
 awscli = "*"
+environs = ">=4.2.0"
 
 [scripts]
 test = "pytest"
