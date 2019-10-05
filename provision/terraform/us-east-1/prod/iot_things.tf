@@ -27,7 +27,17 @@ resource "aws_iot_thing_principal_attachment" "air-pollution" {
   thing     = aws_iot_thing.air-pollution.name
 }
 
-resource "aws_iot_policy_attachment" "patt_air-pollution" {
-  policy = aws_iot_policy.air-pollution_pubsub.name
+resource "aws_iot_policy_attachment" "air-pollution-iot" {
+  policy = aws_iot_policy.iot.name
+  target = aws_iot_certificate.air-pollution.arn
+}
+
+resource "aws_iot_policy_attachment" "air-pollution-kinesis" {
+  policy = aws_iot_policy.kinesis.name
+  target = aws_iot_certificate.air-pollution.arn
+}
+
+resource "aws_iot_policy_attachment" "air-pollution-firehose" {
+  policy = aws_iot_policy.firehose.name
   target = aws_iot_certificate.air-pollution.arn
 }
