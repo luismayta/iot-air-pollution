@@ -6,7 +6,7 @@ ARG stage
 
 LABEL NAME air_pollution-app-$stage
 
-ENV PACKAGES bash
+ENV PACKAGES bash git-core
 
 COPY Pipfile* /usr/src/
 
