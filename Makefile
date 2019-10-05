@@ -53,6 +53,7 @@ help:
 	@echo 'Usage:'
 	@echo '    environment               create environment with pyenv'
 	@echo '    clean                     remove files of build'
+	@echo '    execute                   execute examples'
 	@echo '    setup                     install requirements'
 	@echo ''
 	@make aws.help
@@ -82,6 +83,11 @@ setup: clean
 	$(PIPENV_RUN) pre-commit install
 	@cp -rf provision/git/hooks/prepare-commit-msg .git/hooks/
 	@[[ -e ".env" ]] || cp -rf .env.example .env
+	@echo ${MESSAGE_HAPPY}
+
+execute: clean
+	@echo "=====> execute examples..."
+	$(PIPENV_RUN) python air_pollution/__init__.py
 	@echo ${MESSAGE_HAPPY}
 
 environment: clean
