@@ -17,7 +17,7 @@ else
 	PIPENV_INSTALL:=
 endif
 
-TEAM:=luismayta
+TEAM:=ulima
 PROJECT := terraform-iot-air-pollution
 PROJECT_PORT := 8000
 KEYNAME:=air-pollution
@@ -33,7 +33,7 @@ MESSAGE_HAPPY:="Done! ${MESSAGE}, Now Happy Coding"
 SOURCE_DIR=$(ROOT_DIR)/
 PROVISION_DIR:=$(ROOT_DIR)/provision
 FILE_README:=$(ROOT_DIR)/README.rst
-KEYBASE_PATH ?= /keybase/private/${TEAM}
+KEYBASE_PATH ?= /keybase/team/${TEAM}
 KEYS_PEM_DIR:=${KEYBASE_PATH}/pem
 KEYS_KEY_DIR:=${KEYBASE_PATH}/key
 KEYS_CSR_DIR:=${KEYBASE_PATH}/csr
