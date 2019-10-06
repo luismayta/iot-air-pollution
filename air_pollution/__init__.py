@@ -4,6 +4,7 @@ from AWSIoTPythonSDK.MQTTLib import AWSIoTMQTTClient
 import json
 import time
 from config import configs
+from datetime import datetime
 
 stage = configs[os.environ.get("STAGE")]
 
@@ -58,6 +59,8 @@ if __name__ == "__main__":
             "mq7": 30,
             "mq135": 30,
             "dht22": {"temperature": 10, "humidity": 10},
+            "issued_date": datetime.now().timestamp(),
+            "metadata": {"other": "value"},
         }
         send_message(client=mqtt_client, data=message)
         print("Published topic %s: %s\n" % (topic, message))
