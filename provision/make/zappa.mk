@@ -1,6 +1,6 @@
 # Zappa
 .PHONY: zappa.help
-SERVICE:=app
+SERVICE:=zappa
 
 zappa:
 	@if [[ -z "${command}" ]]; then \
