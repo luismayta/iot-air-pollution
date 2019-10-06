@@ -62,3 +62,8 @@ output "db_private_ip" {
   description = "private ip server db"
   value       = aws_instance.db.private_ip
 }
+
+output "aws_eip" {
+  description = "eip public"
+  value       = aws_eip.eip.public_ip
+}
