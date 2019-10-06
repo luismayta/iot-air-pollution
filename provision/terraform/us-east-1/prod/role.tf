@@ -19,6 +19,12 @@ resource "aws_iam_policy_attachment" "kinesis" {
   policy_arn = aws_iam_policy.kinesis.arn
 }
 
+resource "aws_iam_instance_profile" "air-pollution" {
+  name = "${var.namespace}-${var.stage}-air-pollution-${var.aws_region}"
+  role = aws_iam_role.air-pollution.name
+}
+
+
 resource "aws_iam_policy_attachment" "firehose" {
   name = "${var.namespace}-${var.project}-firehose"
   roles = [
