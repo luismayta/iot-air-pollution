@@ -53,6 +53,11 @@ output "aws_iot_certificate_air-pollution_private_key" {
   value       = aws_iot_certificate.air-pollution.private_key
 }
 
+output "aws_kinesis_stream__air-pollution" {
+  description = "kinesis stream air-pollution"
+  value       = aws_kinesis_stream.air-pollution.arn
+}
+
 output "db_public_ip" {
   description = "public ip server db"
   value       = aws_instance.db.public_ip
