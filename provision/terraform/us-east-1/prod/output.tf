@@ -52,3 +52,13 @@ output "aws_iot_certificate_air-pollution_private_key" {
   description = "private key air pollution"
   value       = aws_iot_certificate.air-pollution.private_key
 }
+
+output "db_public_ip" {
+  description = "public ip server db"
+  value       = aws_instance.db.public_ip
+}
+
+output "db_private_ip" {
+  description = "private ip server db"
+  value       = aws_instance.db.private_ip
+}
