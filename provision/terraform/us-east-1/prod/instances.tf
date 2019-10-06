@@ -6,9 +6,9 @@ resource "aws_instance" "db" {
   instance_type        = var.aws_instance_type
   iam_instance_profile = aws_iam_instance_profile.air-pollution.name
   key_name             = aws_key_pair.auth.key_name
-  vpc_security_group_ids = [
-    aws_security_group.main.id,
-    aws_security_group.postgresql.id,
+  security_groups = [
+    aws_security_group.main.name,
+    aws_security_group.postgresql.name,
   ]
 
   provisioner "local-exec" {
