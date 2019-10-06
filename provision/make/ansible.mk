@@ -32,7 +32,7 @@ ansible.update: clean
 			   --roles-path ${ANSIBLE_DIR}/${stage}/roles/contrib --force
 
 ansible.tag: clean
-	@$(PIPENV_RUN) ansible-playbook -v ${ANSIBLE_DIR}/${stage}/deploy.yaml -i ${ANSIBLE_DIR}/${stage}/inventories/aws \
+	@$(PIPENV_RUN) ansible-playbook -vvv ${ANSIBLE_DIR}/${stage}/deploy.yaml -i ${ANSIBLE_DIR}/${stage}/inventories/aws \
 					--user=${USER} --private-key=${KEYS_PEM_DIR}/${PROJECT}-${stage}.pem \
 					--tags ${tags} \
 					--extra-vars @${ANSIBLE_DIR}/${stage}/vars/vars.yaml \
