@@ -5,3 +5,11 @@ resource "aws_s3_bucket" "air-pollution" {
     enabled = true
   }
 }
+
+resource "aws_s3_bucket" "lambda" {
+  bucket = "lambda-zappa-${var.project}-${var.stage}"
+  acl    = "private"
+  versioning {
+    enabled = true
+  }
+}

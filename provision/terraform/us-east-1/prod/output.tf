@@ -72,3 +72,12 @@ output "aws_eip" {
   description = "eip public"
   value       = aws_eip.eip.public_ip
 }
+
+# s3
+output "aws_s3_bucket__lambda" {
+  value = aws_s3_bucket.lambda.bucket_domain_name
+}
+
+output "aws_s3_bucket_arn__lambda" {
+  value = aws_s3_bucket.lambda.arn
+}
