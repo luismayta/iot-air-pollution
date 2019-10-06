@@ -1,20 +1,6 @@
 resource "aws_iam_role" "air-pollution" {
-  name = "${var.project}"
-
-  assume_role_policy = <<EOF
-{
-        "Version": "2012-10-17",
-        "Statement": [
-        {
-            "Effect": "Allow",
-            "Principal": {
-                "Service": "iot.amazonaws.com"
-            },
-            "Action": "sts:AssumeRole"
-        }
-        ]
-}
-EOF
+  name               = var.project
+  assume_role_policy = data.aws_iam_policy_document.air-pollution.json
 }
 
 resource "aws_iam_policy_attachment" "sqs" {
