@@ -47,7 +47,7 @@ def send_message(client: AWSIoTMQTTClient, data: dict) -> None:
 
 if __name__ == "__main__":
     """Execute send payload."""
-    client = get_mqtt_client()
+    mqtt_client = get_mqtt_client()
     while True:
         # Built message
         message = {
@@ -57,8 +57,8 @@ if __name__ == "__main__":
             "mq5": 30,
             "mq7": 30,
             "mq135": 30,
-            "dht22": 30,
+            "dht22": {"temperature": 10, "humidity": 10},
         }
-        send_message(client=client, data=message)
+        send_message(client=mqtt_client, data=message)
         print("Published topic %s: %s\n" % (topic, message))
         time.sleep(1)
