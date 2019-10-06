@@ -8,6 +8,8 @@ data "aws_iam_policy_document" "air-pollution" {
         "iot.amazonaws.com",
         "firehose.amazonaws.com",
         "ec2.amazonaws.com",
+        "lambda.amazonaws.com",
+        "events.amazonaws.com",
       ]
     }
   }
