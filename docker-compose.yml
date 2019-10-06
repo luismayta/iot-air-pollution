@@ -19,3 +19,13 @@ services:
       - .:/usr/src
     env_file:
       - .env
+
+  zappa:
+    environment: *environment
+    build:
+      context: .
+      dockerfile: provision/docker/zappa/Dockerfile
+    volumes:
+      - .:/usr/src
+    env_file:
+      - .env
