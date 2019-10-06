@@ -22,13 +22,30 @@
     - databases
     - postgresql
 
-- name: Dump database PostgreSQL
+
+- name: Configure Table PostgreSQL
   hosts: dbservers
   gather_facts: True
-  become_user: "{{ user }}"
-  roles:
-    - role: contrib/equipindustry.postgresql
-      backup_only: yes
+  become: True
+  tasks:
+    - name: Create table pollution
+      postgresql_table:
+        db: "{{ app_db_name }}"
+        table: "{{ application_table }}"
+        login_host: "{{ host_database }}"
+        login_user: "{{ postgresql_user }}"
+        login_password: "{{ postgresql_pass }}"
+        columns:
+          - id bigserial primary key
+          - device varchar(150) not null
+          - location varchar(150) not null
+          - mq2 bigint
+          - mq5 bigint
+          - mq7 bigint
+          - mq135 bigint
+          - dht22 json
+          - issued_date TIMESTAMPTZ not null
+          - metadata json not null
   tags:
-    - backup
-    - deploy
+    - databases
+    - tables
