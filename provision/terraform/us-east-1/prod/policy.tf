@@ -126,7 +126,9 @@ data "aws_iam_policy_document" "s3" {
 
     resources = [
       aws_s3_bucket.air-pollution.arn,
-      "${aws_s3_bucket.air-pollution.arn}/*"
+      "${aws_s3_bucket.air-pollution.arn}/*",
+      aws_s3_bucket.lambda.arn,
+      "${aws_s3_bucket.lambda.arn}/*"
     ]
   }
 }
