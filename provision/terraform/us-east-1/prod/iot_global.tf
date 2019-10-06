@@ -6,7 +6,7 @@ resource "aws_iot_topic_rule" "air_pollution_sensor_rule" {
   name        = "air_pollution_sensor_rule"
   description = "Kinesis Rule"
   enabled     = true
-  sql         = "SELECT * FROM 'air-pollution/events'"
+  sql         = "SELECT * FROM 'topic/${var.topic}'"
   sql_version = "2016-03-23"
 
   kinesis {
