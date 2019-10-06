@@ -17,6 +17,16 @@ services:
     env_file:
       - .env
 
+  zappa:
+    image: air_pollution-zappa-dev
+    environment:
+      - STAGE=local
+    build:
+      args:
+        stage: dev
+    env_file:
+      - .env
+
   check:
     environment: *environment
     build:
