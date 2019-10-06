@@ -1,7 +1,3 @@
-/*
- * IOT global configuration
- */
-
 resource "aws_iot_thing_type" "air-pollution" {
   name = "pollution"
 }
