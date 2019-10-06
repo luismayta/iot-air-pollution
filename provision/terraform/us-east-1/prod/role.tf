@@ -3,6 +3,11 @@ resource "aws_iam_role" "air-pollution" {
   assume_role_policy = data.aws_iam_policy_document.air-pollution.json
 }
 
+resource "aws_iam_instance_profile" "air-pollution" {
+  name = "${var.namespace}-${var.stage}-air-pollution-${var.aws_region}"
+  role = aws_iam_role.air-pollution.name
+}
+
 resource "aws_iam_policy_attachment" "sqs" {
   name = "${var.namespace}-${var.project}-sqs"
   roles = [
@@ -19,11 +24,13 @@ resource "aws_iam_policy_attachment" "kinesis" {
   policy_arn = aws_iam_policy.kinesis.arn
 }
 
-resource "aws_iam_instance_profile" "air-pollution" {
-  name = "${var.namespace}-${var.stage}-air-pollution-${var.aws_region}"
-  role = aws_iam_role.air-pollution.name
+resource "aws_iam_policy_attachment" "logging" {
+  name = "${var.namespace}-${var.project}-logging"
+  roles = [
+    aws_iam_role.air-pollution.name
+  ]
+  policy_arn = aws_iam_policy.logging.arn
 }
-
 
 resource "aws_iam_policy_attachment" "firehose" {
   name = "${var.namespace}-${var.project}-firehose"

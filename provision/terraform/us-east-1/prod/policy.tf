@@ -61,6 +61,28 @@ data "aws_iam_policy_document" "sqs" {
   }
 }
 
+resource "aws_iam_policy" "logging" {
+  name        = "${var.project}_logging"
+  description = "Policy by aws logging"
+  policy      = data.aws_iam_policy_document.logging.json
+}
+
+data "aws_iam_policy_document" "logging" {
+  statement {
+    actions = [
+      "logs:CreateLogGroup",
+      "logs:CreateLogStream",
+      "logs:PutLogEvents",
+    ]
+
+    effect = "Allow"
+
+    resources = [
+      "arn:aws:logs:*:*:*",
+    ]
+  }
+}
+
 resource "aws_iam_policy" "kinesis" {
   name        = "${var.project}_kinesis"
   description = "Policy by aws kinesis"
