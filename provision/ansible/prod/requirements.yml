@@ -1,0 +1,17 @@
+# Install a role from the Ansible Galaxy
+# - src: hadenlabs.authorization
+#   version: 0.1.0
+
+# Install a role from GitHub
+
+- name: equipindustry.common
+  src: https://github.com/equipindustry/ansible-role-common
+  version: origin/develop
+
+- name: equipindustry.postgresql
+  src: https://github.com/equipindustry/ansible-role-postgresql
+  version: origin/develop
+
+- name: equipindustry.ntp
+  src: https://github.com/okchaty/ansible-role-ntp
+  version: origin/develop
