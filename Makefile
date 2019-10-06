@@ -64,6 +64,7 @@ help:
 	@make keybase.help
 	@make terragrunt.help
 	@make utils.help
+	@make zappa.help
 
 clean:
 	@echo "=====> clean files unnecessary for ${TEAM}..."
