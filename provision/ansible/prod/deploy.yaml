@@ -1,0 +1,34 @@
+- name: Common stuff for all the server
+  hosts: all
+  become: true
+  gather_facts: true
+  roles:
+    - contrib/equipindustry.ntp
+    - contrib/equipindustry.common
+  tags:
+    - all
+    - common
+    - provision
+    - sync
+
+- name: Configure PostgreSQL
+  hosts: dbservers
+  gather_facts: True
+  become: True
+  roles:
+    - role: contrib/equipindustry.postgresql
+  tags:
+    - install
+    - databases
+    - postgresql
+
+- name: Dump database PostgreSQL
+  hosts: dbservers
+  gather_facts: True
+  become_user: "{{ user }}"
+  roles:
+    - role: contrib/equipindustry.postgresql
+      backup_only: yes
+  tags:
+    - backup
+    - deploy

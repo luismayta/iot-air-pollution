@@ -1,0 +1,28 @@
+---
+
+# PostgreSQL
+
+postgresql_version: 9.6
+postgresql_listen_addresses:
+  - '*'
+postgresql_databases:
+  - name: '{{ postgresql_database_name }}'
+    port: '{{ postgresql_port }}'
+  - name: '{{ postgresql_database_test_name }}'
+    port: '{{ postgresql_port }}'
+
+postgresql_users:
+  - db: '{{ postgresql_database_name }}'
+    name: '{{ postgresql_user }}'
+    password: '{{ postgresql_pass }}'
+    priv: ALL
+    role_attr_flags: SUPERUSER
+  - db: '{{ postgresql_database_test_name }}'
+    name: '{{ postgresql_user }}'
+    password: '{{ postgresql_pass }}'
+    priv: ALL
+    role_attr_flags: SUPERUSER
+
+# postgis
+
+postgresql_postgis: yes
