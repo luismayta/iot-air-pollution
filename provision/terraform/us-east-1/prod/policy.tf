@@ -1,3 +1,17 @@
+data "aws_iam_policy_document" "air-pollution" {
+  statement {
+    actions = ["sts:AssumeRole"]
+
+    principals {
+      type = "Service"
+      identifiers = [
+        "iot.amazonaws.com",
+        "firehose.amazonaws.com",
+      ]
+    }
+  }
+}
+
 resource "aws_iot_policy" "iot" {
   name   = var.project
   policy = <<EOF
@@ -75,7 +89,7 @@ resource "aws_iam_policy" "firehose" {
 data "aws_iam_policy_document" "firehose" {
   statement {
     actions = [
-      "firehose:PutRecord*",
+      "firehose:PutRecord",
       "firehose:DescribeDeliveryStream",
       "firehose:ListDeliveryStreams",
     ]
@@ -83,7 +97,7 @@ data "aws_iam_policy_document" "firehose" {
     effect = "Allow"
 
     resources = [
-      "*"
+      aws_kinesis_firehose_delivery_stream.air-pollution.arn,
     ]
   }
 }
