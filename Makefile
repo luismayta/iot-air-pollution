@@ -56,6 +56,7 @@ help:
 	@echo '    execute                   execute examples'
 	@echo '    setup                     install requirements'
 	@echo ''
+	@make ansible.help
 	@make aws.help
 	@make alias.help
 	@make docker.help
