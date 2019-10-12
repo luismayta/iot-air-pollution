@@ -18,6 +18,7 @@ else
 endif
 
 TEAM:=ulima
+AWS_VAULT ?= ulima
 PROJECT := terraform-iot-air-pollution
 PROJECT_PORT := 8000
 KEYNAME:=air-pollution
@@ -44,6 +45,7 @@ PATH_DOCKER_COMPOSE:=docker-compose.yml -f provision/docker-compose
 DOCKER_SERVICE:=app
 
 docker-compose:=$(PIPENV_RUN) docker-compose
+terragrunt:=unset AWS_VAULT && aws-vault exec ${AWS_VAULT} -- terragrunt
 
 include provision/make/*.mk
 

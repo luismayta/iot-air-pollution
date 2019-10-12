@@ -2,7 +2,6 @@
 .PHONY: terragrunt.help
 TERRAFORM_VERSION := 0.12.6
 TERRAFORM_DIR:=$(PROVISION_DIR)/terraform
-terragrunt := terragrunt
 
 terragrunt.help:
 	@echo '    terragrunt:'
@@ -39,7 +38,7 @@ terragrunt.decrypt: clean
 	fi
 
 terragrunt.init: clean
-	@if [ -z "${stage}" ]; then \
+	if [ -z "${stage}" ]; then \
 		cd ${TERRAFORM_DIR}/us-east-1/ && $(terragrunt) init --reconfigure; \
 	else \
 		cd ${TERRAFORM_DIR}/us-east-1/${stage}/ && $(terragrunt) init --reconfigure; \
