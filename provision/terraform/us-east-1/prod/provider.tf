@@ -10,7 +10,7 @@ provider "aws" {
 # AWS Region for Cloudfront (ACM certs only supports us-east-1)
 provider "aws" {
   version = ">=1.26.0"
-  region  = "us-east-1"
+  region  = var.aws_region
   alias   = "cloudfront"
 }
 

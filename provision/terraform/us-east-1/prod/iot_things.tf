@@ -9,17 +9,17 @@ resource "aws_iot_certificate" "air-pollution" {
 
 resource "local_file" "certificate_pem" {
   content  = aws_iot_certificate.air-pollution.certificate_pem
-  filename = var.file_crt
+  filename = local.file_crt
 }
 
 resource "local_file" "public_key" {
   content  = aws_iot_certificate.air-pollution.public_key
-  filename = var.public_key
+  filename = local.public_key
 }
 
 resource "local_file" "private_key" {
   content  = aws_iot_certificate.air-pollution.private_key
-  filename = var.private_key
+  filename = local.private_key
 }
 
 resource "aws_iot_thing_principal_attachment" "air-pollution" {
