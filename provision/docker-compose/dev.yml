@@ -24,6 +24,8 @@ services:
     build:
       args:
         stage: dev
+    volumes:
+      - .:/usr/src
     env_file:
       - .env
 
