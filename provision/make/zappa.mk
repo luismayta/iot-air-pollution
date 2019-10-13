@@ -16,6 +16,7 @@ zappa.help:
 	@echo ''
 	@echo '        zappa                 command=(certify|deploy|update|undeploy), stage=(prod, staging)'
 	@echo '        zappa.run 	         run by stage'
+	@echo '        zappa.tail 	         tail by stage'
 	@echo '        zappa.encrypt         encrypt'
 	@echo '        zappa.decrypt         decrypt'
 	@echo ''
@@ -27,6 +28,10 @@ zappa.run: clean
 	else \
 		$(docker-compose) -f ${PATH_DOCKER_COMPOSE}/${stage}.yml run --rm ${SERVICE} bash; \
 	fi
+
+zappa.tail: clean
+	@$(docker-compose) -f ${PATH_DOCKER_COMPOSE}/dev.yml run --rm $(SERVICE) \
+			bash -c "$(PIPENV_RUN) zappa tail ${stage} --since=1m"; \
 
 zappa.encrypt: clean
 	@$(PIPENV_RUN) ansible-vault encrypt ${SOURCE_DIR}/zappa_settings.json \
