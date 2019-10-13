@@ -12,8 +12,6 @@ ansible.help:
 	@echo '        ansible.encrypt            encrypt by stage'
 	@echo '        ansible.decrypt            decrypt by stage'
 	@echo '        ansible.update             Update Roles ansible by stage'
-	@echo '        ansible.provision          Provision servers by stage'
-	@echo '        ansible.deploy             Deploy dependences by stage'
 	@echo '        ansible.tag                Deploy tags by stage'
 	@echo '        > examples:'
 	@echo '          make ansible.tag tags=provision,databases stage=prod'
