@@ -83,7 +83,7 @@ endif
 
 setup: clean
 	@echo "=====> install packages..."
-	$(PIPENV_INSTALL) --dev
+	$(PIPENV_INSTALL) --dev --skip-lock
 	$(PIPENV_RUN) pre-commit install
 	@cp -rf provision/git/hooks/prepare-commit-msg .git/hooks/
 	@[[ -e ".env" ]] || cp -rf .env.example .env
@@ -96,4 +96,4 @@ execute: clean
 
 environment: clean
 	@echo "=====> loading virtualenv ${PYENV_NAME}..."
-	@pipenv --venv || $(PIPENV_INSTALL) --python ${PYTHON_VERSION}
+	@pipenv --venv || $(PIPENV_INSTALL) --python ${PYTHON_VERSION} --skip-lock
