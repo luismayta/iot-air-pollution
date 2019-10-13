@@ -91,7 +91,7 @@ setup: clean
 
 execute: clean
 	@echo "=====> execute examples..."
-	$(PIPENV_RUN) python air_pollution/__init__.py
+	$(PIPENV_RUN) python air_pollution/publisher.py
 	@echo ${MESSAGE_HAPPY}
 
 environment: clean
