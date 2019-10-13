@@ -1,3 +1,5 @@
+docker_test=$(docker-compose) -f ${PATH_DOCKER_COMPOSE}/test.yml
+
 test.help:
 	@echo '    Tests:'
 	@echo ''
@@ -8,7 +10,7 @@ test.help:
 	@echo '        test.lint                 Run all pre-commit'
 	@echo '        test.lint.docker          Run all pre-commit in docker'
 	@echo '        test.syntax               Run all syntax in code'
-	@echo '        test.validate           Run all validation fixture dead in code'
+	@echo '        test.validate             Run all validation fixture dead in code'
 	@echo ''
 
 test: clean
@@ -17,23 +19,19 @@ test: clean
 		make test.help;\
 	fi
 	@if [ -n "${run}" ]; then \
-		$(docker-compose) -f ${PATH_DOCKER_COMPOSE}/test.yml run --rm \
-			app bash -c "$(PIPENV_RUN) pytest ${run}" ; \
+		$(docker_test) run --rm $(DOCKER_SERVICE) bash -c "$(PIPENV_RUN) py.test ${run}";\
 	fi
 
 test.all: clean
 	@echo $(MESSAGE) Running tests on the current Python interpreter with coverage $(END)
-	$(docker-compose) -f ${PATH_DOCKER_COMPOSE}/test.yml run --rm \
-		app bash -c "$(PIPENV_RUN) pytest"
+	$(docker_test) run --rm $(DOCKER_SERVICE) bash -c "$(PIPENV_RUN) pytest"
 
 test.picked: clean
-	$(docker-compose) -f ${PATH_DOCKER_COMPOSE}/test.yml run --rm \
-		app bash -c "$(PIPENV_RUN) pytest --picked"
+	$(docker_test) run --rm $(DOCKER_SERVICE) bash -c "$(PIPENV_RUN) pytest --picked"
 
 test.validate: clean
 	@echo $(MESSAGE) Running tests validation fixture $(END)
-	$(docker-compose) -f ${PATH_DOCKER_COMPOSE}/test.yml run --rm \
-		app bash -c "$(PIPENV_RUN) pytest --dead-fixtures"
+	$(docker_test) run --rm $(DOCKER_SERVICE) bash -c "$(PIPENV_RUN) py.test --dead-fixtures"
 
 test.lint: clean
 	$(docker-compose) -f ${PATH_DOCKER_COMPOSE}/test.yml run --rm \
