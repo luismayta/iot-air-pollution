@@ -45,7 +45,7 @@ PATH_DOCKER_COMPOSE:=docker-compose.yml -f provision/docker-compose
 DOCKER_SERVICE:=app
 
 docker-compose:=$(PIPENV_RUN) docker-compose
-terragrunt:=unset AWS_VAULT && aws-vault exec ${AWS_VAULT} -- terragrunt
+terragrunt:=terragrunt
 
 include provision/make/*.mk
 
