@@ -9,8 +9,3 @@ terraform {
     arguments = ["-lock-timeout=40m"]
   }
 }
-
-inputs = {
-  # This now works with Terragrunt 0.19.x and newer!
-  foo = get_env("FOO", "default")
-}

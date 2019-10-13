@@ -30,3 +30,14 @@ remote_state {
     }
   }
 }
+
+inputs = {
+  keybase_path = get_env("KEYBASE_VOLUME_PATH", "default")
+  namespace = "iot-air-pollution"
+  aws_region = "us-east-1"
+}
+
+locals {
+  common_vars = yamldecode(file("${get_terragrunt_dir()}/${find_in_parent_folders("common_vars.yaml")}"))
+  region = "us-east-1"
+}
