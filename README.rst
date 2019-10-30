@@ -18,10 +18,10 @@ Requirements
 This is a list of applications that need to be installed previously to
 enjoy all the goodies of this configuration:
 
--  `Pyenv`_
--  `Docker`_
--  `Terraform`_
--  `Terragrunt`_
+- `Pyenv`_
+- `Docker`_
+- `Terraform`_
+- `Terragrunt`_
 
 Quick Start
 ===========
@@ -87,6 +87,7 @@ Made with :heart: :coffee: and :pizza: by `company`_.
 .. _`company`: https://github.com/luismayta
 
 .. dependences
+
 .. _`Pyenv`: https://github.com/pyenv/pyenv
 .. _`Docker`: https://www.docker.com/
 .. _`Terraform`: https://www.terraform.io
