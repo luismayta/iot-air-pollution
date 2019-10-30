@@ -10,6 +10,7 @@ class Config:
     ROOT_CA_PATH = env.str("ROOT_CA_PATH")
     CERTIFICATE_PATH = env.str("CERTIFICATE_PATH")
     PRIVATE_KEY_PATH = env.str("PRIVATE_KEY_PATH")
+    DB_URL = env.str("DB_URL")
 
 
 class StagingConfig(Config):
