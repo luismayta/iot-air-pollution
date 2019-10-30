@@ -18,7 +18,8 @@ RUN apt-get update -y \
   shellcheck \
   # install python dependencies
   && pip3 install pipenv \
-  && pipenv install --dev \
+  && pipenv install --dev --skip-lock \
+  && pipenv shell --fancy \
   && apt-get purge \
   && apt-get autoremove -y \
   && rm -rf /var/lib/apt/lists/*

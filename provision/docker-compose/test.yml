@@ -6,12 +6,31 @@
 version: "3.6"
 services:
 
+  # PostgreSQL database.
+  db-test:
+    restart: always
+    image: postgres:11
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=air-pollution_test
+    env_file:
+      - .env
+    volumes:
+      - db-test:/var/lib/postgresql/data # Using the declared volume.
+
   app:
     image: air_pollution-app-test
     environment: &environment
       - STAGE=test
+      - DB_URL=postgresql+psycopg2://postgres:postgres@db:5432/air-pollution_test
     build:
       args:
         stage: test
     volumes:
       - .:/usr/src
+    depends_on:
+      - db-test
+
+volumes:
+  db-test:
