@@ -1,5 +1,3 @@
-docker_test=$(docker-compose) -f ${PATH_DOCKER_COMPOSE}/test.yml
-
 test.help:
 	@echo '    Tests:'
 	@echo ''
@@ -19,7 +17,7 @@ test: clean
 		make test.help;\
 	fi
 	@if [ -n "${run}" ]; then \
-		$(docker_test) run --rm $(DOCKER_SERVICE) bash -c "$(PIPENV_RUN) py.test ${run}";\
+		$(docker_test) run --rm $(DOCKER_SERVICE) bash -c "$(PIPENV_RUN) pytest ${run}";\
 	fi
 
 test.all: clean

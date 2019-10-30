@@ -30,7 +30,7 @@ PYENV_NAME="${PROJECT}"
 SHELL ?=/bin/bash
 ROOT_DIR=$(shell pwd)
 MESSAGE:=🍺️
-MESSAGE_HAPPY:="Done! ${MESSAGE}, Now Happy Coding"
+MESSAGE_HAPPY:="Done! ${MESSAGE}, Now Happy Hacking"
 SOURCE_DIR=$(ROOT_DIR)/
 PROVISION_DIR:=$(ROOT_DIR)/provision
 FILE_README:=$(ROOT_DIR)/README.rst
@@ -84,7 +84,7 @@ endif
 setup: clean
 	@echo "=====> install packages..."
 	$(PIPENV_INSTALL) --dev --skip-lock
-	$(PIPENV_RUN) pre-commit install
+	$(PIPENV_RUN) pre-commit install && pre-commit install -t pre-push
 	@cp -rf provision/git/hooks/prepare-commit-msg .git/hooks/
 	@[[ -e ".env" ]] || cp -rf .env.example .env
 	@echo ${MESSAGE_HAPPY}
@@ -96,4 +96,5 @@ execute: clean
 
 environment: clean
 	@echo "=====> loading virtualenv ${PYENV_NAME}..."
-	@pipenv --venv || $(PIPENV_INSTALL) --python ${PYTHON_VERSION} --skip-lock
+	@pipenv --venv || $(PIPENV_INSTALL) --python=${PYTHON_VERSION} --skip-lock
+	@echo ${MESSAGE_HAPPY}
