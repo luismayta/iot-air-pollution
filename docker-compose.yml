@@ -12,20 +12,41 @@ services:
     build:
       context: .
       dockerfile: provision/docker/app/Dockerfile
+    depends_on:
+      - db
     environment: &environment
       - AWS_REGION=us-east-1
       - AWS_DEFAULT_REGION=us-east-1
+      - DB_URL=postgresql+psycopg2://postgres:postgres@db:5432/air-pollution
     volumes:
       - .:/usr/src
     env_file:
       - .env
+
+  # PostgreSQL database.
+  db:
+    restart: always
+    image: postgres:11
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=air-pollution
+    volumes:
+      - db:/var/lib/postgresql/data # Using the declared volume.
+      - .:/usr/src
+    env_file: .env
 
   zappa:
     environment: *environment
     build:
       context: .
       dockerfile: provision/docker/zappa/Dockerfile
+      args:
+        stage: prod
     volumes:
       - .:/usr/src
     env_file:
       - .env
+
+volumes:
+  db:
