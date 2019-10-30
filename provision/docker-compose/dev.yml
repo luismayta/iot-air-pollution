@@ -4,11 +4,23 @@
 version: "3.6"
 services:
 
+  # PostgreSQL database.
+  db:
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=air-pollution
+    volumes:
+      - db:/var/lib/postgresql/data # Using the declared volume.
+      - .:/usr/src
+
   # Python
   app:
     image: air_pollution-app-dev
     environment: &environment
       - STAGE=local
+      - DB_URL=postgis://postgres:postgres@db:5432/air-pollution
     build:
       args:
         stage: dev
@@ -16,6 +28,8 @@ services:
       - .:/usr/src
     env_file:
       - .env
+    depends_on:
+      - db
 
   zappa:
     image: air_pollution-zappa-dev
@@ -40,3 +54,6 @@ services:
       - .:/usr/src
     env_file:
       - .env
+
+volumes:
+  db:

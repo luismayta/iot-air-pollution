@@ -22,7 +22,7 @@ RUN  groupadd -g 500 -r python \
   && apt-get update -y \
   && apt-get install -y $PACKAGES \
   && pip3 install pipenv \
-  && pipenv install --dev \
+  && pipenv install --dev --skip-lock \
   && pipenv shell --fancy \
   && apt-get purge \
   && rm -rf /var/lib/apt/lists/*
