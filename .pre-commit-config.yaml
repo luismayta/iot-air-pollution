@@ -1,9 +1,9 @@
 repos:
--   repo: https://github.com/pre-commit/pre-commit.git
-    rev: v1.18.2
+-   repo: https://github.com/pre-commit/pre-commit
+    rev: v1.20.0
     hooks:
     -   id: validate_manifest
--   repo: https://github.com/detailyang/pre-commit-shell.git
+-   repo: https://github.com/detailyang/pre-commit-shell
     rev: 1.0.5
     hooks:
     -   id: shell-lint
@@ -33,8 +33,8 @@ repos:
     rev: 93f5296d960021ee1f507a59a0bca1fe8f73c285
     hooks:
     -   id: do_not_commit
--   repo: https://github.com/pre-commit/mirrors-pylint.git
-    rev: v2.3.1
+-   repo: https://github.com/pre-commit/mirrors-pylint
+    rev: v2.4.3
     hooks:
     -   id: pylint
         exclude: __pycache__|migrations|conf.py|_build|.tox|pootle/static|pootle/translations|pootle/locale|pootle/assets|templates
@@ -44,23 +44,21 @@ repos:
         - --ignore=settings_test, migrations
         language_version: python3
 -   repo: https://github.com/ambv/black
-    rev: 19.3b0
+    rev: 19.10b0
     hooks:
     -   id: black
-        language_version: python3.7
 -   repo: https://gitlab.com/pycqa/flake8
-    rev: 3.7.8
+    rev: 3.7.9
     hooks:
     -   id: flake8
--   repo: https://github.com/luismayta/pre-commit-mypy.git
-    rev: 0.1.1
+-   repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v0.740
     hooks:
     -   id: mypy
         args:
         - --ignore-missing-imports
-        language_version: python3
 -   repo: https://github.com/pre-commit/pre-commit-hooks.git
-    rev: v2.3.0
+    rev: v2.4.0
     hooks:
     -   id: detect-private-key
         files: ^(?!\.?git-crypt)
@@ -78,17 +76,11 @@ repos:
         args:
         - --autofix
     -   id: check-xml
-        language_version: python3
     -   id: check-yaml
-        language_version: python3
     -   id: check-case-conflict
-        language_version: python3
     -   id: check-byte-order-marker
-        language_version: python3
     -   id: check-ast
-        language_version: python3
     -   id: debug-statements
-        language_version: python3
     -   id: check-docstring-first
     -   id: detect-aws-credentials
     -   id: requirements-txt-fixer
@@ -110,7 +102,7 @@ repos:
         additional_dependencies:
         - black
 - repo: https://github.com/antonbabenko/pre-commit-terraform
-  rev: v1.17.0
+  rev: v1.19.0
   hooks:
     - id: terraform_fmt
     - id: terraform_docs
