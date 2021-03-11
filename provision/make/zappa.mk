@@ -22,21 +22,21 @@ zappa.help:
 	@echo ''
 
 
-zappa.run: clean
+zappa.run:
 	@if [ -z "${stage}" ]; then \
 		$(docker-compose) -f ${PATH_DOCKER_COMPOSE}/dev.yml run --rm ${SERVICE} bash; \
 	else \
 		$(docker-compose) -f ${PATH_DOCKER_COMPOSE}/${stage}.yml run --rm ${SERVICE} bash; \
 	fi
 
-zappa.tail: clean
+zappa.tail:
 	@$(docker-compose) -f ${PATH_DOCKER_COMPOSE}/dev.yml run --rm $(SERVICE) \
 			bash -c "$(PIPENV_RUN) zappa tail ${stage} --since=1m"; \
 
-zappa.encrypt: clean
+zappa.encrypt:
 	@$(PIPENV_RUN) ansible-vault encrypt ${SOURCE_DIR}/zappa_settings.json \
 		--vault-password-file ${PASSWORD_DIR}/${PROJECT}-${stage}.txt && echo $(MESSAGE_HAPPY)
 
-zappa.decrypt: clean
+zappa.decrypt:
 	@$(PIPENV_RUN) ansible-vault decrypt ${SOURCE_DIR}/zappa_settings.json \
 		--vault-password-file ${PASSWORD_DIR}/${PROJECT}-${stage}.txt && echo $(MESSAGE_HAPPY)

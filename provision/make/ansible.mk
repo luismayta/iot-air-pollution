@@ -17,21 +17,25 @@ ansible.help:
 	@echo '          make ansible.tag tags=provision,databases stage=prod'
 	@echo ''
 
-ansible.encrypt: clean
+ansible.encrypt:
 	@$(PIPENV_RUN) ansible-vault encrypt ${ANSIBLE_DIR}/${stage}/vars/vars.yaml \
-		--vault-password-file ${PASSWORD_DIR}/${PROJECT}-${stage}.txt && echo $(MESSAGE_HAPPY)
+		--vault-password-file ${KEYBASE_PROJECT_PATH}/${stage}/password/${PROJECT}-${stage}.txt && \
+		echo $(MESSAGE_HAPPY)
 
-ansible.decrypt: clean
+ansible.decrypt:
 	@$(PIPENV_RUN) ansible-vault decrypt ${ANSIBLE_DIR}/${stage}/vars/vars.yaml \
-		--vault-password-file ${PASSWORD_DIR}/${PROJECT}-${stage}.txt && echo $(MESSAGE_HAPPY)
+		--vault-password-file ${KEYBASE_PROJECT_PATH}/${stage}/password/${PROJECT}-${stage}.txt && \
+		echo $(MESSAGE_HAPPY)
 
-ansible.update: clean
+ansible.update:
 	@$(PIPENV_RUN) ansible-galaxy install -r ${ANSIBLE_DIR}/${stage}/requirements.yml \
 			   --roles-path ${ANSIBLE_DIR}/${stage}/roles/contrib --force
 
-ansible.tag: clean
-	@$(PIPENV_RUN) ansible-playbook -vvv ${ANSIBLE_DIR}/${stage}/deploy.yaml -i ${ANSIBLE_DIR}/${stage}/inventories/aws \
-					--user=${USER} --private-key=${KEYS_PEM_DIR}/${PROJECT}-${stage}.pem \
-					--tags ${tags} \
-					--extra-vars @${ANSIBLE_DIR}/${stage}/vars/vars.yaml \
-					--vault-password-file ${PASSWORD_DIR}/${PROJECT}-${stage}.txt && echo $(MESSAGE_HAPPY)
+ansible.tag:
+	@$(PIPENV_RUN) ansible-playbook -v \
+			${ANSIBLE_DIR}/${stage}/deploy.yaml -i ${ANSIBLE_DIR}/${stage}/inventories/aws \
+			--user=${USER} --private-key=${KEYBASE_PROJECT_PATH}/${stage}/pem/${PROJECT}-${stage}.pem \
+			--tags ${tags} \
+			--extra-vars @${ANSIBLE_DIR}/${stage}/vars/vars.yaml \
+			--vault-password-file ${KEYBASE_PROJECT_PATH}/${stage}/password/${PROJECT}-${stage}.txt && \
+			echo $(MESSAGE_HAPPY)

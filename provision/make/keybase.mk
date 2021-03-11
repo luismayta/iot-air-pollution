@@ -7,20 +7,21 @@ keybase.help:
 	@echo '    keybase:'
 	@echo ''
 	@echo '        keybase                      help keybase'
+	@echo '        keybase.environment          Enviroment path for keybase'
 	@echo '        keybase.setup                Setup dependences for keybase'
 	@echo ''
 
-keybase: clean
+keybase:
 	make keybase.help
 
-keybase.setup: clean
+keybase.environment:
+	@echo "=====> make environment for ${TEAM}..."
+	mkdir -p ${KEYBASE_PROJECT_PATH}/gpg
+	mkdir -p ${KEYBASE_PROJECT_PATH}/{staging,prod,dev,core}/{pem,private,password,pub,openssl}
+	@echo ${MESSAGE_HAPPY}
+
+keybase.setup:
 	@echo "=====> make dependences for ${TEAM}..."
-	mkdir -p ${KEYS_PEM_DIR}
-	mkdir -p ${KEYS_PUB_DIR}
-	mkdir -p ${KEYS_KEY_DIR}
-	mkdir -p ${KEYS_CSR_DIR}
-	mkdir -p ${KEYS_PRIVATE_DIR}
-	mkdir -p ${PASSWORD_DIR}
-	touch ${PASSWORD_DIR}/${PROJECT}-staging.txt
-	touch ${PASSWORD_DIR}/${PROJECT}-prod.txt
+	mkdir -p ${KEYBASE_PROJECT_PATH}/gpg
+	mkdir -p ${KEYBASE_PROJECT_PATH}/{staging,prod,dev,core}/{pem,private,password,pub,openssl}
 	@echo ${MESSAGE_HAPPY}
