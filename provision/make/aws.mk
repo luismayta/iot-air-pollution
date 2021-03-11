@@ -11,10 +11,10 @@ aws.help:
 	@echo '        aws.iot.createkeys             deploy files to bucket'
 	@echo ''
 
-aws: clean
+aws:
 	make aws.help
 
-aws.iot.createkeys: clean
+aws.iot.createkeys:
 	@if [[ -z "${stage}" ]]; then \
 		make aws.help;\
 	else \

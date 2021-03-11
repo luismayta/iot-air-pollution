@@ -11,33 +11,31 @@ test.help:
 	@echo '        test.validate             Run all validation fixture dead in code'
 	@echo ''
 
-test: clean
+test:
 	@echo $(MESSAGE) Running tests on the current Python interpreter with coverage $(END)
 	@if [ -z "${run}" ]; then \
 		make test.help;\
 	fi
 	@if [ -n "${run}" ]; then \
-		$(docker_test) run --rm $(DOCKER_SERVICE) bash -c "$(PIPENV_RUN) pytest ${run}";\
+		$(docker-test-run) bash -c "$(PIPENV_RUN) pytest ${run}";\
 	fi
 
-test.all: clean
+test.all:
 	@echo $(MESSAGE) Running tests on the current Python interpreter with coverage $(END)
-	$(docker_test) run --rm $(DOCKER_SERVICE) bash -c "$(PIPENV_RUN) pytest"
+	$(docker-test-run) bash -c "$(PIPENV_RUN) pytest"
 
-test.picked: clean
-	$(docker_test) run --rm $(DOCKER_SERVICE) bash -c "$(PIPENV_RUN) pytest --picked"
+test.picked:
+	$(docker-test-run) bash -c "$(PIPENV_RUN) pytest --picked"
 
-test.validate: clean
+test.validate:
 	@echo $(MESSAGE) Running tests validation fixture $(END)
-	$(docker_test) run --rm $(DOCKER_SERVICE) bash -c "$(PIPENV_RUN) py.test --dead-fixtures"
+	$(docker-test-run) bash -c "$(PIPENV_RUN) py.test --dead-fixtures"
 
-test.lint: clean
-	$(docker-compose) -f ${PATH_DOCKER_COMPOSE}/test.yml run --rm \
-		app bash -c "$(PIPENV_RUN) pre-commit run --all-files --verbose"
+test.lint:
+	$(docker-test-run) bash -c "$(PIPENV_RUN) pre-commit run --all-files --verbose"
 
-test.lint.docker: clean
-	$(docker-compose) -f ${PATH_DOCKER_COMPOSE}/dev.yml \
-		run --rm check sh -c "$(PIPENV_RUN) pre-commit run --all-files --verbose"
+test.lint.docker:
+	$(docker-dev-run) check sh -c "$(PIPENV_RUN) pre-commit run --all-files --verbose"
 
-test.syntax: clean
+test.syntax:
 	@echo $(MESSAGE) Running tests $(END)

@@ -1,21 +1,28 @@
 ## Terragrunt
 .PHONY: terragrunt.help
-TERRAFORM_VERSION := 0.12.6
 TERRAFORM_DIR:=$(PROVISION_DIR)/terraform
+terragrunt := terragrunt
 
 terragrunt.help:
 	@echo '    terragrunt:'
 	@echo ''
-	@echo '        terragrunt                 Apply all'
-	@echo '        terragrunt.init            Init download dependences terraform'
-	@echo '        terragrunt.encrypt         encrypt by stage'
-	@echo '        terragrunt.decrypt         decrypt by stage'
+	@echo '        terragrunt                 show help'
+	@echo '        terragrunt.setup           install dependences'
+	@echo '        terragrunt.environment     install dependences or change environment'
 	@echo '        terragrunt                 command=(plan|apply|refresh|destroy|) by stage'
 	@echo '        terragrunt.state           command=(list|mv|pull|push|rm|show|) by stage'
+	@echo '        terragrunt.init            Init download dependences terraform'
+	@echo '        terragrunt.import          command by stage'
 	@echo ''
 
-terragrunt: clean
-	@if [[ -z "${command}" ]]; then \
+terragrunt.validate:
+	@if [ "${AWS_PROFILE_NAME}" != "${TEAM}" ]; then \
+		echo "----> var ${AWS_PROFILE_NAME} not correspond ${TEAM}"; \
+		exit 2; \
+	fi
+
+terragrunt: terragrunt.validate
+	@if [ -z "${command}" ]; then \
 		make terragrunt.help;\
 	fi
 	@if [ -z "${stage}" ] && [ -n "${command}" ]; then \
@@ -24,28 +31,28 @@ terragrunt: clean
 		cd ${TERRAFORM_DIR}/us-east-1/${stage} && $(terragrunt) ${command} --terragrunt-source-update; \
 	fi
 
-terragrunt.encrypt: clean
-	@$(PIPENV_RUN) ansible-vault encrypt ${TERRAFORM_DIR}/us-east-1/${stage}/variables.tf \
-		--vault-password-file ${PASSWORD_DIR}/${PROJECT}-${stage}.txt && echo $(MESSAGE_HAPPY)
+terragrunt.setup: terragrunt.validate
+	@echo "=====> setup terragrunt..."
+	@tfenv install ${TERRAFORM_VERSION} && tfenv use ${TERRAFORM_VERSION}
+	@echo ${MESSAGE_HAPPY}
+.PHONY: terragrunt.setup
 
-terragrunt.decrypt: clean
-	@if [ -n "${stage}" ] && [ -z "${region}" ]; then \
-		$(PIPENV_RUN) ansible-vault decrypt ${TERRAFORM_DIR}/us-east-1/${stage}/variables.tf \
-		--vault-password-file ${PASSWORD_DIR}/${PROJECT}-${stage}.txt && echo $(MESSAGE_HAPPY); \
-	elif [ -n "${stage}" ] && [ -n "${region}" ]; then \
-		$(PIPENV_RUN) ansible-vault decrypt ${TERRAFORM_DIR}/${region}/${stage}/variables.tf \
-		--vault-password-file ${PASSWORD_DIR}/${PROJECT}-${stage}.txt && echo $(MESSAGE_HAPPY); \
-	fi
+terragrunt.environment:
+	@echo "----> setup terragrunt..."
+	@tfenv use ${TERRAFORM_VERSION} || tfenv install ${TERRAFORM_VERSION} && tfenv use ${TERRAFORM_VERSION}
+	@echo ${MESSAGE_HAPPY}
+.PHONY: terragrunt.environment
 
-terragrunt.init: clean
-	if [ -z "${stage}" ]; then \
+terragrunt.init: terragrunt.validate
+	@if [ -z "${stage}" ]; then \
 		cd ${TERRAFORM_DIR}/us-east-1/ && $(terragrunt) init --reconfigure; \
 	else \
 		cd ${TERRAFORM_DIR}/us-east-1/${stage}/ && $(terragrunt) init --reconfigure; \
 	fi
+.PHONY: terragrunt.init
 
-terragrunt.state: clean
-	@if [[ -z "${command}" ]]; then \
+terragrunt.state: terragrunt.validate
+	@if [ -z "${command}" ]; then \
 		cd ${TERRAFORM_DIR}/us-east-1/prod && $(terragrunt) state ${command} --terragrunt-source-update; \
 	fi
 	@if [ -z "${stage}" ] && [ -n "${command}" ]; then \
@@ -53,3 +60,12 @@ terragrunt.state: clean
 	elif [ -n "${stage}" ] && [ -n "${command}" ]; then \
 		cd ${TERRAFORM_DIR}/us-east-1/${stage} && $(terragrunt) state ${command} --terragrunt-source-update; \
 	fi
+.PHONY: terragrunt.state
+
+terragrunt.import: terragrunt.validate
+	@if [ -z "${stage}" ]; then \
+		cd ${TERRAFORM_DIR}/us-east-1/ && $(terragrunt) import ${command} ; \
+	else \
+		cd ${TERRAFORM_DIR}/us-east-1/${stage}/ && $(terragrunt) import ${command} ; \
+	fi
+.PHONY: terragrunt.import
