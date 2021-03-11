@@ -57,14 +57,13 @@ repos:
     -   id: mypy
         args:
         - --ignore-missing-imports
--   repo: https://github.com/pre-commit/pre-commit-hooks.git
+-   repo: https://github.com/pre-commit/pre-commit-hooks
     rev: v2.4.0
     hooks:
     -   id: detect-private-key
         files: ^(?!\.?git-crypt)
     -   id: check-merge-conflict
     -   id: trailing-whitespace
-        language_version: python3
         files: ^tf|-|\.(py|tfvars|tf|tfenv|env|yml|yaml|pem|key|mock)$
     -   id: end-of-file-fixer
         files: ^tf|-|\.(py|env|yml|yaml|pem|key|mock)$
