@@ -19,7 +19,7 @@ resource "aws_instance" "db" {
     connection {
       type        = "ssh"
       user        = lookup(var.user, "ssh_user")
-      private_key = file(lookup(var.aws_keys, "pem"))
+      private_key = file(lookup(local.aws_keys, "pem"))
       host        = aws_instance.db.public_ip
     }
     inline = [
