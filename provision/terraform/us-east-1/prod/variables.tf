@@ -27,19 +27,19 @@ variable "topic" {
 }
 
 variable "private_key" {
-  default = "team/ulima/csr/terraform-iot-air-pollution-prod.private.key"
+  default = "team/ulima/csr/iot-air-pollution-prod.private.key"
 }
 
 variable "public_key" {
-  default = "team/ulima/csr/terraform-iot-air-pollution-prod.public.key"
+  default = "team/ulima/csr/iot-air-pollution-prod.public.key"
 }
 
 variable "file_crt" {
-  default = "team/ulima/csr/terraform-iot-air-pollution-prod.pem.crt"
+  default = "team/ulima/csr/iot-air-pollution-prod.pem.crt"
 }
 
 variable "root_ca" {
-  default = "team/ulima/csr/terraform-iot-air-pollution-prod-root-certificate.pem.crt"
+  default = "team/ulima/csr/iot-air-pollution-prod-root-certificate.pem.crt"
 }
 
 # AWS
@@ -61,7 +61,7 @@ variable "aws_keys" {
   type        = "map"
   description = "keys pem and pub"
   default = {
-    "pem" = "team/ulima/pem/terraform-iot-air-pollution-prod.pem"
-    "pub" = "team/ulima/pub/terraform-iot-air-pollution-prod.pub"
+    "pem" = "team/ulima/pem/iot-air-pollution-prod.pem"
+    "pub" = "team/ulima/pub/iot-air-pollution-prod.pub"
   }
 }
