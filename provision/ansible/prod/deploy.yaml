@@ -22,7 +22,6 @@
     - databases
     - postgresql
 
-
 - name: Configure Table PostgreSQL
   hosts: dbservers
   gather_facts: True
@@ -30,11 +29,11 @@
   tasks:
     - name: Create table pollution
       postgresql_table:
-        db: "{{ app_db_name }}"
-        table: "{{ application_table }}"
-        login_host: "{{ host_database }}"
-        login_user: "{{ postgresql_user }}"
-        login_password: "{{ postgresql_pass }}"
+        db: '{{ app_db_name }}'
+        table: '{{ application_table }}'
+        login_host: '{{ host_database }}'
+        login_user: '{{ postgresql_user }}'
+        login_password: '{{ postgresql_pass }}'
         columns:
           - id bigserial primary key
           - device varchar(150) not null

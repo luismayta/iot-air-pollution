@@ -1,24 +1,23 @@
 ---
-
 # AWS
-aws_access_key: ""
-aws_secret_access_key: ""
+aws_access_key: ''
+aws_secret_access_key: ''
 
-debug: "True"
-site_domain: "ulima.com"
-site_name: "air-pollution"
+debug: 'True'
+site_domain: 'luismayta.com'
+site_name: 'air-pollution'
 
 host_server_database: "{{ hostvars['0.db.com']['ansible_private'] }}"
 
-app_db_name: "air-pollution"
-app_db_test_name: "air-pollution_test"
+app_db_name: 'air-pollution'
+app_db_test_name: 'air-pollution_test'
 
 common_packages:
-  - "vim"
-  - "git-core"
+  - 'vim'
+  - 'git-core'
 
-postgresql_port: "{{ host_database_port }}"
+postgresql_port: '{{ host_database_port }}'
 postgresql_user: hacker
 postgresql_pass: hacker
-postgresql_database_name: "{{ app_db_name }}"
-postgresql_database_test_name: "{{ app_db_test_name }}"
+postgresql_database_name: '{{ app_db_name }}'
+postgresql_database_test_name: '{{ app_db_test_name }}'

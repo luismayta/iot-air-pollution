@@ -1,4 +1,4 @@
-
+---
 #-------------------------------------------------------------------------------
 # Connection settings for the first connection (before creating all)
 # first_remote_user: "vagrant"
@@ -8,7 +8,7 @@
 #-------------------------------------------------------------------------------
 # System env vars
 # system_env_vars:
-  # SYSTEM_ENV: "sandbox"
+# SYSTEM_ENV: "sandbox"
 
 #-------------------------------------------------------------------------------
 # Bash stuff
