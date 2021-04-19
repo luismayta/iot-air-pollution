@@ -1,0 +1,45 @@
+---
+#
+# This is the canonical configuration for the `README.md`
+# Run `make readme` to rebuild the `README.md`
+#
+
+# Name of this project
+name: iot-air-pollution
+
+email:
+  support: support@hadenlabs.com
+
+# Logo for this project
+#logo: docs/logo.png
+
+# License of this project
+license: 'LGPL-3.0'
+
+# Canonical GitHub repo
+github_repo: luismayta/iot-air-pollution
+
+# Badges to display
+badges:
+  - name: GitHub tag (latest SemVer)
+    image: https://img.shields.io/github/v/tag/luismayta/iot-air-pollution.svg?label=latest&sort=semver
+    url: https://github.com/luismayta/iot-air-pollution/releases
+  - name: Lint
+    image: https://github.com/luismayta/iot-air-pollution/actions/workflows/lint.yml/badge.svg?branch=develop
+    url: https://github.com/luismayta/iot-air-pollution/actions
+  - name: Issues
+    image: https://img.shields.io/github/issues/luismayta/iot-air-pollution.svg
+    url: https://github.com/luismayta/iot-air-pollution/issues
+  - name: Latest Release
+    image: https://img.shields.io/github/release/luismayta/iot-air-pollution.svg
+    url: https://github.com/luismayta/iot-air-pollution/releases
+
+# Short description of this project
+description: |-
+  iot air pollution
+
+# How to use this project
+usage: |-
+
+examples:
+  - 'docs/examples/common.md'
