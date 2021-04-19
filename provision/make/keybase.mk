@@ -1,8 +1,12 @@
 #
 # See ./docs/contributing.md
 #
-.PHONY: keybase.help
 
+KEYBASE_VOLUME_PATH ?= /Keybase
+KEYBASE_TEAM_PATH ?=${KEYBASE_VOLUME_PATH}/${KEYBASE_PATH_TEAM_NAME}/${KEYBASE_OWNER}
+KEYBASE_PROJECT_PATH ?= ${KEYBASE_TEAM_PATH}/${REPOSITORY_DOMAIN}/${REPOSITORY_OWNER}/${PROJECT}
+
+.PHONY: keybase.help
 keybase.help:
 	@echo '    keybase:'
 	@echo ''
@@ -16,12 +20,12 @@ keybase:
 
 keybase.env:
 	@echo "==> make environment for ${TEAM}..."
-	mkdir -p ${KEYBASE_PROJECT_PATH}/gpg
-	mkdir -p ${KEYBASE_PROJECT_PATH}/{staging,prod,dev,core}/{pem,private,password,pub,openssl}
+	@mkdir -p ${KEYBASE_PROJECT_PATH}/gpg
+	@mkdir -p ${KEYBASE_PROJECT_PATH}/{staging,prod,dev,core}/{pem,private,password,pub,openssl}
 	@echo ${MESSAGE_HAPPY}
 
 keybase.setup:
 	@echo "==> make dependences for ${TEAM}..."
-	mkdir -p ${KEYBASE_PROJECT_PATH}/gpg
-	mkdir -p ${KEYBASE_PROJECT_PATH}/{staging,prod,dev,core}/{pem,private,password,pub,openssl}
+	@mkdir -p ${KEYBASE_PROJECT_PATH}/gpg
+	@mkdir -p ${KEYBASE_PROJECT_PATH}/{staging,prod,dev,core}/{pem,private,password,pub,openssl}
 	@echo ${MESSAGE_HAPPY}
