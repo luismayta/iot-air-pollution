@@ -15,8 +15,8 @@ extra:
   font:
     text: 'Source Sans Pro'
 
-repo_name: 'hadenlabs/iot-air-pollution'
-repo_url: 'https://github.com/hadenlabs/iot-air-pollution'
+repo_name: 'luismayta/iot-air-pollution'
+repo_url: 'https://github.com/luismayta/iot-air-pollution'
 
 google_analytics:
   - ''
