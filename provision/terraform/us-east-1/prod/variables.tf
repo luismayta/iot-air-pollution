@@ -27,19 +27,19 @@ variable "topic" {
 }
 
 variable "private_key" {
-  default = "team/ulima/csr/iot-air-pollution-prod.private.key"
+  default = "team/luismayta/csr/iot-air-pollution-prod.private.key"
 }
 
 variable "public_key" {
-  default = "team/ulima/csr/iot-air-pollution-prod.public.key"
+  default = "team/luismayta/csr/iot-air-pollution-prod.public.key"
 }
 
 variable "file_crt" {
-  default = "team/ulima/csr/iot-air-pollution-prod.pem.crt"
+  default = "team/luismayta/csr/iot-air-pollution-prod.pem.crt"
 }
 
 variable "root_ca" {
-  default = "team/ulima/csr/iot-air-pollution-prod-root-certificate.pem.crt"
+  default = "team/luismayta/csr/iot-air-pollution-prod-root-certificate.pem.crt"
 }
 
 # AWS
@@ -49,7 +49,7 @@ variable "aws_instance_type" {
 }
 
 variable "user" {
-  type        = "map"
+  type        = map(string)
   description = "data user"
   default = {
     "ssh_user" = "ubuntu"
@@ -58,10 +58,10 @@ variable "user" {
 }
 
 variable "aws_keys" {
-  type        = "map"
+  type        = map(string)
   description = "keys pem and pub"
   default = {
-    "pem" = "team/ulima/pem/iot-air-pollution-prod.pem"
-    "pub" = "team/ulima/pub/iot-air-pollution-prod.pub"
+    "pem" = "team/luismayta/pem/iot-air-pollution-prod.pem"
+    "pub" = "team/luismayta/pub/iot-air-pollution-prod.pub"
   }
 }
