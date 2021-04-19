@@ -19,12 +19,12 @@ ansible.help:
 
 ansible.encrypt:
 	@$(PIPENV_RUN) ansible-vault encrypt ${ANSIBLE_DIR}/${stage}/vars/vars.yaml \
-		--vault-password-file ${KEYBASE_PROJECT_PATH}/${stage}/password/${PROJECT}-${stage}.txt && \
+		--vault-password-file ${KEYBASE_PROJECT_PATH}/${stage}/password/${stage}.txt && \
 		echo $(MESSAGE_HAPPY)
 
 ansible.decrypt:
 	@$(PIPENV_RUN) ansible-vault decrypt ${ANSIBLE_DIR}/${stage}/vars/vars.yaml \
-		--vault-password-file ${KEYBASE_PROJECT_PATH}/${stage}/password/${PROJECT}-${stage}.txt && \
+		--vault-password-file ${KEYBASE_PROJECT_PATH}/${stage}/password/${stage}.txt && \
 		echo $(MESSAGE_HAPPY)
 
 ansible.update:
@@ -34,8 +34,8 @@ ansible.update:
 ansible.tag:
 	@$(PIPENV_RUN) ansible-playbook -v \
 			${ANSIBLE_DIR}/${stage}/deploy.yaml -i ${ANSIBLE_DIR}/${stage}/inventories/aws \
-			--user=${USER} --private-key=${KEYBASE_PROJECT_PATH}/${stage}/pem/${PROJECT}-${stage}.pem \
+			--user=${USER} --private-key=${KEYBASE_PROJECT_PATH}/${stage}/pem/${stage}.pem \
 			--tags ${tags} \
 			--extra-vars @${ANSIBLE_DIR}/${stage}/vars/vars.yaml \
-			--vault-password-file ${KEYBASE_PROJECT_PATH}/${stage}/password/${PROJECT}-${stage}.txt && \
+			--vault-password-file ${KEYBASE_PROJECT_PATH}/${stage}/password/${stage}.txt && \
 			echo $(MESSAGE_HAPPY)
