@@ -1,9 +1,8 @@
 # Docker Compose
 # https://docs.docker.com/compose/
 
-version: "3.6"
+version: '3.6'
 services:
-
   # PostgreSQL database.
   db:
     restart: always
