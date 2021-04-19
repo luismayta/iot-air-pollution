@@ -1,0 +1,23 @@
+site_name: iot-air-pollution Documentation
+theme: 'material'
+markdown_extensions:
+  - toc:
+      permalink: True
+  - admonition
+  - smarty
+  - wikilinks
+  - codehilite:
+      linenums: True
+extra:
+  palette:
+    primary: '#087da1'
+    accent: '#00a889'
+  font:
+    text: 'Source Sans Pro'
+
+repo_name: 'hadenlabs/iot-air-pollution'
+repo_url: 'https://github.com/hadenlabs/iot-air-pollution'
+
+google_analytics:
+  - ''
+  - 'auto'
