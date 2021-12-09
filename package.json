@@ -50,7 +50,7 @@
     "husky": "^6.0.0",
     "lint-staged": "^12.1.2",
     "node-plop": "^0.30.0",
-    "plop": "^3.0.3",
+    "plop": "^3.0.4",
     "prettier": "^2.5.1",
     "prettier-tslint": "^0.4.2",
     "rimraf": "^3.0.2",
