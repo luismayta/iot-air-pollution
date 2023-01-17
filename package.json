@@ -53,7 +53,7 @@
     "plop": "^3.1.1",
     "prettier": "^2.8.3",
     "prettier-tslint": "^0.4.2",
-    "rimraf": "^4.0.4",
+    "rimraf": "^4.1.0",
     "semantic-release": "^20.0.2",
     "shelljs": "^0.8.5",
     "slugify": "^1.6.5",
